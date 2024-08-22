@@ -33,13 +33,12 @@ const useStations = () => {
   return { stationData, loading, error };
 };
 
-// 각 place별로 최신 데이터를 추출하는 함수
-const filterLatestData = (items) => {
+const lastData = (items) => {
   const latestData = {};
 
   items.forEach((item) => {
     const { place, COLLECTION_DATE } = item;
-    // 최신 데이터가 아니면 업데이트
+
     if (
       !latestData[place] ||
       new Date(COLLECTION_DATE) > new Date(latestData[place].COLLECTION_DATE)
@@ -51,4 +50,15 @@ const filterLatestData = (items) => {
   return Object.values(latestData);
 };
 
-export { useStations, filterLatestData };
+const searchStation = (items, word) => {
+  const searchData = {};
+
+  items.forEach((item) => {
+    const { place } = item;
+    if (place === word) {
+      searchData[place] = item;
+    }
+  });
+};
+
+export { useStations, lastData, searchStation };

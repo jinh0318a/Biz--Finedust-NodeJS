@@ -22,7 +22,7 @@ const Detail = () => {
           <span>미세먼지</span>
           <span>초미세먼지</span>
           <span>습도</span>
-          <span></span>
+          <span>CO2</span>
           <span>측정시간</span>
         </li>
       </ul>
