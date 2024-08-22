@@ -3,6 +3,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "../css/main.css";
 import { useStations, lastData, average } from "../modules/StationUtils";
+import { colorHandlerOnce } from "../modules/CssUtils";
 
 const AirQualityMap = () => {
   const [finedustList, setFinedustList] = useState([]);
@@ -50,8 +51,12 @@ const AirQualityMap = () => {
     }
   }, [finedustList]);
 
+  useEffect(() => {
+    colorHandlerOnce();
+  });
+
   return (
-    <div>
+    <div className="once">
       <div
         id="map"
         style={{ height: "600px", width: "80%", margin: "0 auto" }}
@@ -59,7 +64,7 @@ const AirQualityMap = () => {
       <div>
         <h2>광산구 평균 미세먼지 현황</h2>
         <p>데이터는 약 5분마다 갱신됩니다.</p>
-        <table>
+        <table className="avgList">
           <thead>
             <tr>
               <th>미세먼지(µg/m³)</th>
@@ -70,8 +75,8 @@ const AirQualityMap = () => {
           </thead>
           <tbody>
             <tr>
-              <td>{avgData.avgPM10}</td>
-              <td>{avgData.avgPM2_5}</td>
+              <td className="PM10">{avgData.avgPM10}</td>
+              <td className="PM25">{avgData.avgPM2_5}</td>
               <td>{avgData.avgCO2}</td>
               <td>{avgData.avgHumidity}</td>
             </tr>

@@ -142,3 +142,44 @@ div.main {
   font-weight: 900;
   text-align: center;
 }
+
+table {
+  margin: 10px auto;
+  tr {
+    th,
+    td {
+      padding: 10px;
+      white-space: nowrap;
+      border: 1px solid #ddd;
+    }
+  }
+}
+
+div.back {
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+div.once {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+span.good {
+  background-color: #2286f7;
+}
+
+span.normal {
+  background-color: #02bc30;
+}
+
+span.bad {
+  background-color: #fda60d;
+}
+
+span.verybad {
+  background-color: #e64746;
+}

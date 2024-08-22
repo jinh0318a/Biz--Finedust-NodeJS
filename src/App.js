@@ -1,4 +1,3 @@
-import React from "react";
 import StationMain from "./station/StationMain";
 import OnceMain from "./once/OnceMain";
 import { Route, Routes } from "react-router-dom";
