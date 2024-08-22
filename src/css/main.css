@@ -1,0 +1,145 @@
+@charset "UTF-8";
+
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@100..900&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  font-style: normal;
+}
+
+html {
+  height: 100vh;
+  width: 100vw;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+header {
+  width: 100%;
+  padding: 1.5rem;
+  text-align: center;
+  background: linear-gradient(
+      217deg,
+      rgba(255, 0, 0, 0.8),
+      rgba(255, 0, 0, 0) 70.71%
+    ),
+    linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71%),
+    linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
+  color: transparent;
+  -webkit-background-clip: text;
+  text-shadow: 1px 1px 1px black;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+section.main {
+  height: 80%;
+  width: 80%;
+  padding: 1rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+article.list {
+  text-align: center;
+  height: 86%;
+  flex: 1;
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 900;
+  }
+  ul {
+    height: 100%;
+    list-style: none;
+    overflow-y: auto;
+    li {
+      white-space: nowrap;
+      border-bottom: 1px solid #ddd;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #ccc;
+      }
+    }
+  }
+}
+article.detail {
+  height: 95%;
+  flex: 2;
+
+  section.detail {
+    height: 100%;
+    text-align: center;
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 900;
+    }
+    ul {
+      height: 95%;
+      list-style: none;
+      overflow-y: auto;
+
+      li.head {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+      li {
+        white-space: nowrap;
+        display: flex;
+        span {
+          flex: 1;
+          border: 1px solid white;
+        }
+      }
+    }
+  }
+}
+
+ul.finedust-list::-webkit-scrollbar {
+  display: none;
+}
+
+div.main {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+div.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  div.description {
+    width: 80%;
+    display: flex;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    span {
+      flex: 1;
+      text-align: center;
+    }
+  }
+}
