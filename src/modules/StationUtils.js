@@ -51,14 +51,41 @@ const lastData = (items) => {
 };
 
 const searchStation = (items, word) => {
-  const searchData = {};
-
-  items.forEach((item) => {
-    const { place } = item;
-    if (place === word) {
-      searchData[place] = item;
-    }
-  });
+  return items.filter((item) =>
+    item.place.toLowerCase().includes(word.toLowerCase())
+  );
 };
 
-export { useStations, lastData, searchStation };
+const average = (data) => {
+  if (data.length === 0) {
+    return {
+      avgPM10: 0,
+      avgPM2_5: 0,
+      avgCO2: 0,
+      avgHumidity: 0,
+    };
+  }
+
+  let totalPM10 = 0;
+  let totalPM2_5 = 0;
+  let totalCO2 = 0;
+  let totalHumidity = 0;
+
+  data.forEach((item) => {
+    totalPM10 += parseFloat(item.PM10) || 0;
+    totalPM2_5 += parseFloat(item.PM2_5) || 0;
+    totalCO2 += parseFloat(item.CO2) || 0;
+    totalHumidity += parseFloat(item.HUMIDITY) || 0;
+  });
+
+  const count = data.length;
+
+  return {
+    avgPM10: (totalPM10 / count).toFixed(2),
+    avgPM2_5: (totalPM2_5 / count).toFixed(2),
+    avgCO2: (totalCO2 / count).toFixed(2),
+    avgHumidity: (totalHumidity / count).toFixed(2),
+  };
+};
+
+export { useStations, lastData, searchStation, average };

@@ -1,18 +1,11 @@
 import React, { useState } from "react";
-import { useStations, lastData } from "../modules/StationUtils";
+import { searchStation } from "../modules/StationUtils";
 
-const List = () => {
-  const { stationData, loading, error } = useStations();
+const List = ({ latestData, onClickHandler }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
-  const latestData = lastData(stationData);
-
-  const filteredData = latestData.filter((station) =>
-    station.place.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // 검색어가 있을 때 searchStation을 사용하여 필터링
+  const filteredData = searchStation(latestData, searchTerm);
 
   return (
     <>
@@ -29,8 +22,13 @@ const List = () => {
       <ul className="finedust-list">
         {filteredData.length > 0 ? (
           filteredData.map((station) => (
-            <li>
-              <span>{station.place}</span>
+            <li key={station.place}>
+              <span
+                className="place"
+                onClick={() => onClickHandler(station.place)}
+              >
+                {station.place}
+              </span>
             </li>
           ))
         ) : (

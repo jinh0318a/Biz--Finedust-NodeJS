@@ -2,10 +2,19 @@ import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "../css/main.css";
+import { useStations, lastData, average } from "../modules/StationUtils";
 
 const AirQualityMap = () => {
   const [finedustList, setFinedustList] = useState([]);
-  const mapRef = useRef(null); // 지도 참조를 위한 useRef
+  const mapRef = useRef(null);
+  const { stationData } = useStations();
+  const avgData = average(stationData);
+  useEffect(() => {
+    if (stationData.length > 0) {
+      const latestData = lastData(stationData);
+      setFinedustList(latestData);
+    }
+  }, [stationData]);
 
   useEffect(() => {
     // 지도 초기화
@@ -18,17 +27,8 @@ const AirQualityMap = () => {
       }).addTo(mapRef.current);
     }
 
-    // 데이터 가져오기
-    fetch("/api/finedust") // 실제 API 엔드포인트로 수정
-      .then((response) => response.json())
-      .then((data) => {
-        setFinedustList(data);
-      })
-      .catch((error) => console.error("데이터 가져오기 실패:", error));
-  }, []); // 빈 의존성 배열로 마운트 시 한 번만 실행
-
-  useEffect(() => {
-    if (mapRef.current) {
+    // 마커 추가
+    if (mapRef.current && finedustList.length > 0) {
       finedustList.forEach((finedust) => {
         const lat = parseFloat(finedust.LATITUDE);
         const lon = parseFloat(finedust.LONGITUDE);
@@ -48,7 +48,7 @@ const AirQualityMap = () => {
         }
       });
     }
-  }, [finedustList]); // finedustList가 변경될 때마다 실행
+  }, [finedustList]);
 
   return (
     <div>
@@ -70,10 +70,10 @@ const AirQualityMap = () => {
           </thead>
           <tbody>
             <tr>
-              <td>{/* PM10 데이터 */}</td>
-              <td>{/* PM2_5 데이터 */}</td>
-              <td>{/* CO2 데이터 */}</td>
-              <td>{/* HUMIDITY 데이터 */}</td>
+              <td>{avgData.avgPM10}</td>
+              <td>{avgData.avgPM2_5}</td>
+              <td>{avgData.avgCO2}</td>
+              <td>{avgData.avgHumidity}</td>
             </tr>
           </tbody>
         </table>
