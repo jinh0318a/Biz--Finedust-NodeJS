@@ -47,79 +47,69 @@ const useWeather = () => {
 };
 
 const weatherList = (data) => {
-  if (data && data.length > 0) {
-    return data
-      .map((item) => {
-        let weather = "";
-        let info = "";
-        if (item.category === "PTY") {
+  if (!data || data.length === 0) {
+    return <li>날씨정보가 없습니다</li>;
+  }
+
+  return data
+    .map((item) => {
+      let weather = "";
+      let info = "";
+
+      switch (item.category) {
+        case "PTY":
           info = "강수형태";
-          switch (item.fcstValue) {
-            case "0":
-              weather = "없음";
-              break;
-            case "1":
-              weather = "비";
-              break;
-            case "2":
-              weather = "비/눈";
-              break;
-            case "3":
-              weather = "눈";
-              break;
-            case "5":
-              weather = "빗방울";
-              break;
-            case "6":
-              weather = "빗방울눈날림";
-              break;
-            case "7":
-              weather = "눈날림";
-              break;
-            default:
-              weather = "알 수 없음";
-          }
-        } else if (item.category === "RN1") {
+          weather =
+            {
+              0: "없음",
+              1: "비",
+              2: "비/눈",
+              3: "눈",
+              5: "빗방울",
+              6: "빗방울눈날림",
+              7: "눈날림",
+            }[item.fcstValue] || "알 수 없음";
+          break;
+
+        case "RN1":
           info = "강수량";
           weather =
             item.fcstValue === "강수없음"
-              ? item.fcstValue
-              : item.fcstValue + "mm/h";
-        } else if (item.category === "SKY") {
-          info = "하늘상태";
-          switch (item.fcstValue) {
-            case "1":
-              weather = "맑음";
-              break;
-            case "3":
-              weather = "구름많음";
-              break;
-            case "4":
-              weather = "흐림";
-              break;
-            default:
-              weather = "알 수 없음";
-          }
-        } else if (item.category === "T1H") {
-          info = "기온";
-          weather = item.fcstValue + "°C";
-        } else if (item.category === "REH") {
-          info = "습도";
-          weather = item.fcstValue + "%";
-        } else {
-          return null;
-        }
+              ? "강수없음"
+              : `${item.fcstValue}mm/h`;
+          break;
 
-        return (
-          <li key={`${item.fcstDate}-${item.fcstTime}`}>
-            {info} {item.fcstDate} {item.fcstTime} {weather}
-          </li>
-        );
-      })
-      .filter(Boolean);
-  } else {
-    return <li>날씨정보가 없습니다</li>;
-  }
+        case "SKY":
+          info = "하늘상태";
+          weather =
+            {
+              1: "맑음",
+              3: "구름많음",
+              4: "흐림",
+            }[item.fcstValue] || "알 수 없음";
+          break;
+
+        case "T1H":
+          info = "기온";
+          weather = `${item.fcstValue}°C`;
+          break;
+
+        case "REH":
+          info = "습도";
+          weather = `${item.fcstValue}%`;
+          break;
+
+        default:
+          return null;
+      }
+
+      return (
+        <li key={`${item.fcstDate}-${item.fcstTime}`}>
+          {info} {item.fcstDate} {item.fcstTime} {weather}
+        </li>
+      );
+    })
+    .filter(Boolean);
 };
 
 export { useWeather, weatherList };

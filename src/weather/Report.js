@@ -4,10 +4,12 @@ const Report = () => {
   const { data } = useWeather();
 
   return (
-    <div>
+    <>
       <h1>날씨</h1>
-      <ul>{weatherList(data)}</ul>
-    </div>
+      <div className="weather">
+        <ul>{weatherList(data)}</ul>
+      </div>
+    </>
   );
 };
 
