@@ -3,3 +3,11 @@
 - [https://github.com/jinh0318a/Biz-Finedust-2024.git]
 
 - 저번 프로젝트인 광주광역시 광산구 미세먼지 데이터 API 를 활용한 Spring 프로젝트를 React 방식으로 리팩토링 해보기
+
+- key.js 파일을 만들고 키 집어넣기
+
+```key.js
+const key =
+  "API KEY";
+export default key;
+```
