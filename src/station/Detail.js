@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { colorHandlerDetail } from "../modules/CssUtils";
-const Detail = ({ selectedPlace, stationData, onLoadComplete }) => {
+const Detail = ({ selectedPlace, stationData }) => {
   useEffect(() => {
-    // 컴포넌트가 마운트된 후 색상 처리 함수 호출
     colorHandlerDetail();
   }, [selectedPlace, stationData]);
   if (!selectedPlace) {

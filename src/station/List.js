@@ -4,7 +4,6 @@ import { searchStation } from "../modules/StationUtils";
 const List = ({ latestData, onClickHandler }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  // 검색어가 있을 때 searchStation을 사용하여 필터링
   const filteredData = searchStation(latestData, searchTerm);
 
   return (

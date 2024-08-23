@@ -5,7 +5,6 @@ import { lastData, useStations } from "../modules/StationUtils";
 import { useState } from "react";
 
 const Main = () => {
-  // 측정소 리스트 불러오기
   const { stationData } = useStations();
   const latestData = lastData(stationData);
 
@@ -25,7 +24,12 @@ const Main = () => {
         </article>
       </section>
       <div className="main">
-        <Link to="/once">전체보기</Link>
+        <div>
+          <Link to="/once">전체보기</Link>
+        </div>
+        <div>
+          <Link to="/weather">날씨</Link>
+        </div>
       </div>
     </>
   );

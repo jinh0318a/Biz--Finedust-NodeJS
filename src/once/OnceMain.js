@@ -4,16 +4,24 @@ import "leaflet/dist/leaflet.css";
 import "../css/main.css";
 import { useStations, lastData, average } from "../modules/StationUtils";
 import { colorHandlerOnce } from "../modules/CssUtils";
+import { Link } from "react-router-dom";
 
 const AirQualityMap = () => {
   const [finedustList, setFinedustList] = useState([]);
   const mapRef = useRef(null);
   const { stationData } = useStations();
-  const avgData = average(stationData);
+  const [avgData, setAvgData] = useState({
+    avgPM10: 0,
+    avgPM2_5: 0,
+    avgCO2: 0,
+    avgHumidity: 0,
+  });
   useEffect(() => {
     if (stationData.length > 0) {
       const latestData = lastData(stationData);
       setFinedustList(latestData);
+      const avg = average(latestData);
+      setAvgData(avg);
     }
   }, [stationData]);
 
@@ -84,7 +92,12 @@ const AirQualityMap = () => {
         </table>
       </div>
       <div className="back">
-        <a href="/">돌아가기</a>
+        <div>
+          <Link to="/">홈</Link>
+        </div>
+        <div>
+          <Link to="/weather">날씨</Link>
+        </div>
       </div>
     </div>
   );

@@ -141,6 +141,10 @@ div.main {
   font-size: 1.5rem;
   font-weight: 900;
   text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 20px;
 }
 
 table {
@@ -158,6 +162,10 @@ table {
 div.back {
   font-size: 1.5rem;
   font-weight: 900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 div.once {

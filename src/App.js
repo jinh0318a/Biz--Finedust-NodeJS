@@ -1,6 +1,7 @@
 import StationMain from "./station/StationMain";
 import OnceMain from "./once/OnceMain";
 import { Route, Routes } from "react-router-dom";
+import WeatherMain from "./weather/WeatherMain";
 
 const App = () => {
   return (
@@ -9,6 +10,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<StationMain />} />
         <Route path="/once" element={<OnceMain />} />
+        <Route path="/weather" element={<WeatherMain />} />
       </Routes>
     </>
   );
