@@ -200,11 +200,19 @@ section.weather.main {
 }
 
 div.weather {
-  ul {
+  height: 80%;
+  width: 100%;
+  overflow: auto;
+  scrollbar-width: none;
+  table {
     width: 80%;
     white-space: nowrap;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+
+    tr {
+      text-align: center;
+      width: 100%;
+    }
   }
 }

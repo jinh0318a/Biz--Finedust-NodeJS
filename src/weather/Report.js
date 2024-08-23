@@ -5,10 +5,7 @@ const Report = () => {
 
   return (
     <>
-      <h1>날씨</h1>
-      <div className="weather">
-        <ul>{weatherList(data)}</ul>
-      </div>
+      <div className="weather">{weatherList(data)}</div>
     </>
   );
 };
